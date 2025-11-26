@@ -64,7 +64,7 @@ async function handleAddTask(e) {
     };
     
     try {
-        const response = await fetch('/api/tasks/', {
+        const response = await fetch('/api/tasks', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ async function handleAddTask(e) {
 // Save tasks to API and re-render
 async function saveAndRender() {
     try {
-        const response = await fetch(`/api/tasks/?ordering=${currentSort}`);
+        const response = await fetch(`/api/tasks?ordering=${currentSort}`);
         if (response.ok) {
             tasks = await response.json();
             renderTasks();
@@ -248,7 +248,7 @@ async function handleCompleteTask(e) {
     if (!task) return;
 
     try {
-        const response = await fetch(`/api/tasks/${taskId}/toggle_complete/`, {
+        const response = await fetch(`/api/tasks/${taskId}/toggle_complete`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -277,7 +277,7 @@ async function handleDeleteTask(e) {
     }
 
     try {
-        const response = await fetch(`/api/tasks/${taskId}/`, {
+        const response = await fetch(`/api/tasks/${taskId}`, {
             method: 'DELETE',
             headers: {
                 'X-CSRFToken': getCookie('csrftoken')
